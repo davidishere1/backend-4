@@ -172,3 +172,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Security reports go through
 ## License
 
 [MIT](LICENSE)
+
+<!-- fix: issue #203 - [DOC-004] Stellar payment flow architecture diagram missing -->
