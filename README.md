@@ -85,6 +85,7 @@ docker compose up --build    # API on :3000, data in the stellarpos-data volume
 | `npm test` | 56 Jest + Supertest tests against an in-memory database |
 | `npm run check` | Lint, type-check and test: what CI runs |
 | `npm run db:seed` | Seed the demo store (refuses to touch a non-empty database) |
+| `npm run db:backup` | Snapshot the database now; set `BACKUP_INTERVAL_HOURS` for automatic backups |
 
 ## API at a glance
 
@@ -107,7 +108,7 @@ Lists add `pagination: { page, limit, total, pages }`.
 
 Full request and response details: [docs/api.md](docs/api.md).
 Real-time events: `payment:confirmed`, `payment:expired`,
-`transaction:completed`, `inventory:low` (Socket.IO, with the JWT in
+`transaction:completed`, `inventory:low`, `analytics:updated` (Socket.IO, with the JWT in
 `auth.token`).
 
 ## How a Stellar checkout works
@@ -172,3 +173,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Security reports go through
 ## License
 
 [MIT](LICENSE)
+
+## Dead-Letter Queue Handling\n\nFailed async jobs must be routed to a dead-letter queue after a configurable number of retries. Without DLQ handling, failed jobs silently disappear, causing payment status to get stuck without operator visibility.
